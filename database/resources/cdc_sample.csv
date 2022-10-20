@@ -1,0 +1,25 @@
+,case_month,res_state,state_fips_code,res_county,county_fips_code,age_group,sex,race,ethnicity,case_positive_specimen,current_status,case_onset_interval,underlying_conditions_yn
+16,2020-06,NV,32,CLARK,32003,18 to 49 years,Female,White,Hispanic/Latino,0,Laboratory-confirmed case,0,Yes
+29,2020-06,NV,32,CLARK,32003,18 to 49 years,Female,White,Hispanic/Latino,0,Laboratory-confirmed case,0,Yes
+38,2020-12,NY,36,NASSAU,36059,18 to 49 years,Female,NA,NA,1,Laboratory-confirmed case,0,Yes
+55,2020-06,NV,32,CLARK,32003,18 to 49 years,Female,White,Hispanic/Latino,1,Laboratory-confirmed case,0,Yes
+67,2020-08,NV,32,CLARK,32003,50 to 64 years,Female,White,Hispanic/Latino,1,Laboratory-confirmed case,0,Yes
+105,2020-08,NV,32,CLARK,32003,50 to 64 years,Female,White,Hispanic/Latino,0,Laboratory-confirmed case,0,Yes
+116,2020-11,OH,39,NA,NA,50 to 64 years,Male,White,Non-Hispanic/Latino,0,Probable Case,0,Yes
+182,2020-08,NV,32,CLARK,32003,50 to 64 years,Female,White,Hispanic/Latino,1,Laboratory-confirmed case,0,Yes
+201,2020-08,NV,32,CLARK,32003,50 to 64 years,Female,White,Hispanic/Latino,1,Laboratory-confirmed case,0,Yes
+239,2020-08,NV,32,CLARK,32003,50 to 64 years,Female,White,Hispanic/Latino,0,Laboratory-confirmed case,0,Yes
+304,2020-03,NY,36,BRONX,36005,65+ years,Female,Black,Non-Hispanic/Latino,1,Laboratory-confirmed case,0,Yes
+372,2020-08,NV,32,CLARK,32003,50 to 64 years,Female,White,Hispanic/Latino,0,Laboratory-confirmed case,0,Yes
+392,2020-08,NV,32,CLARK,32003,50 to 64 years,Female,White,Hispanic/Latino,-1,Laboratory-confirmed case,0,Yes
+447,2020-08,NV,32,CLARK,32003,50 to 64 years,Female,White,Hispanic/Latino,1,Laboratory-confirmed case,0,Yes
+467,2020-08,NV,32,CLARK,32003,50 to 64 years,Female,White,Hispanic/Latino,2,Laboratory-confirmed case,0,Yes
+545,2020-08,NV,32,CLARK,32003,50 to 64 years,Female,White,Hispanic/Latino,0,Laboratory-confirmed case,0,Yes
+620,2020-08,NV,32,CLARK,32003,50 to 64 years,Female,White,Hispanic/Latino,0,Laboratory-confirmed case,0,Yes
+742,2020-03,NY,36,BRONX,36005,65+ years,Female,Black,Non-Hispanic/Latino,0,Laboratory-confirmed case,0,Yes
+752,2020-08,NV,32,CLARK,32003,50 to 64 years,Female,White,Hispanic/Latino,0,Laboratory-confirmed case,0,Yes
+796,2020-08,NV,32,CLARK,32003,50 to 64 years,Female,White,Hispanic/Latino,3,Laboratory-confirmed case,0,Yes
+866,2020-08,NV,32,CLARK,32003,50 to 64 years,Female,White,Hispanic/Latino,0,Laboratory-confirmed case,0,Yes
+923,2020-08,NV,32,CLARK,32003,50 to 64 years,Female,White,Hispanic/Latino,1,Laboratory-confirmed case,0,Yes
+941,2020-08,NV,32,CLARK,32003,50 to 64 years,Female,White,Hispanic/Latino,0,Laboratory-confirmed case,0,Yes
+961,2020-08,NV,32,CLARK,32003,50 to 64 years,Female,White,Hispanic/Latino,0,Laboratory-confirmed case,0,Yes
