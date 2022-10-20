@@ -51,6 +51,6 @@ This dataset is a deidentified patient-level record of reported COVID-19 cases f
 
 
 ## Machine Learning Model
-Logistic Regression ML model
+The machine learning model we chose for this project is a Logistic Regression Model because it will categorize the results into two parts: yes or no. This will effectively answer the question if covid deaths can be predicted based on several factors or underlying conditions.
 
 
