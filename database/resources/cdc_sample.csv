@@ -1,25 +1,20 @@
-,case_month,res_state,state_fips_code,res_county,county_fips_code,age_group,sex,race,ethnicity,case_positive_specimen,current_status,case_onset_interval,underlying_conditions_yn
-16,2020-06,NV,32,CLARK,32003,18 to 49 years,Female,White,Hispanic/Latino,0,Laboratory-confirmed case,0,Yes
-29,2020-06,NV,32,CLARK,32003,18 to 49 years,Female,White,Hispanic/Latino,0,Laboratory-confirmed case,0,Yes
-38,2020-12,NY,36,NASSAU,36059,18 to 49 years,Female,NA,NA,1,Laboratory-confirmed case,0,Yes
-55,2020-06,NV,32,CLARK,32003,18 to 49 years,Female,White,Hispanic/Latino,1,Laboratory-confirmed case,0,Yes
-67,2020-08,NV,32,CLARK,32003,50 to 64 years,Female,White,Hispanic/Latino,1,Laboratory-confirmed case,0,Yes
-105,2020-08,NV,32,CLARK,32003,50 to 64 years,Female,White,Hispanic/Latino,0,Laboratory-confirmed case,0,Yes
-116,2020-11,OH,39,NA,NA,50 to 64 years,Male,White,Non-Hispanic/Latino,0,Probable Case,0,Yes
-182,2020-08,NV,32,CLARK,32003,50 to 64 years,Female,White,Hispanic/Latino,1,Laboratory-confirmed case,0,Yes
-201,2020-08,NV,32,CLARK,32003,50 to 64 years,Female,White,Hispanic/Latino,1,Laboratory-confirmed case,0,Yes
-239,2020-08,NV,32,CLARK,32003,50 to 64 years,Female,White,Hispanic/Latino,0,Laboratory-confirmed case,0,Yes
-304,2020-03,NY,36,BRONX,36005,65+ years,Female,Black,Non-Hispanic/Latino,1,Laboratory-confirmed case,0,Yes
-372,2020-08,NV,32,CLARK,32003,50 to 64 years,Female,White,Hispanic/Latino,0,Laboratory-confirmed case,0,Yes
-392,2020-08,NV,32,CLARK,32003,50 to 64 years,Female,White,Hispanic/Latino,-1,Laboratory-confirmed case,0,Yes
-447,2020-08,NV,32,CLARK,32003,50 to 64 years,Female,White,Hispanic/Latino,1,Laboratory-confirmed case,0,Yes
-467,2020-08,NV,32,CLARK,32003,50 to 64 years,Female,White,Hispanic/Latino,2,Laboratory-confirmed case,0,Yes
-545,2020-08,NV,32,CLARK,32003,50 to 64 years,Female,White,Hispanic/Latino,0,Laboratory-confirmed case,0,Yes
-620,2020-08,NV,32,CLARK,32003,50 to 64 years,Female,White,Hispanic/Latino,0,Laboratory-confirmed case,0,Yes
-742,2020-03,NY,36,BRONX,36005,65+ years,Female,Black,Non-Hispanic/Latino,0,Laboratory-confirmed case,0,Yes
-752,2020-08,NV,32,CLARK,32003,50 to 64 years,Female,White,Hispanic/Latino,0,Laboratory-confirmed case,0,Yes
-796,2020-08,NV,32,CLARK,32003,50 to 64 years,Female,White,Hispanic/Latino,3,Laboratory-confirmed case,0,Yes
-866,2020-08,NV,32,CLARK,32003,50 to 64 years,Female,White,Hispanic/Latino,0,Laboratory-confirmed case,0,Yes
-923,2020-08,NV,32,CLARK,32003,50 to 64 years,Female,White,Hispanic/Latino,1,Laboratory-confirmed case,0,Yes
-941,2020-08,NV,32,CLARK,32003,50 to 64 years,Female,White,Hispanic/Latino,0,Laboratory-confirmed case,0,Yes
-961,2020-08,NV,32,CLARK,32003,50 to 64 years,Female,White,Hispanic/Latino,0,Laboratory-confirmed case,0,Yes
+,case_month,res_state,state_fips_code,res_county,county_fips_code,age_group,sex,race,ethnicity,current_status,case_positive_specimen,case_onset_interval,underlying_conditions_yn
+13,2020-12,NY,36,BRONX,36005,18 to 49 years,Female,NA,NA,Laboratory-confirmed case,16,0,Yes
+81,2021-01,TN,47,SHELBY,47157,50 to 64 years,Female,White,Non-Hispanic/Latino,Laboratory-confirmed case,0,0,Yes
+97,2020-05,NY,36,QUEENS,36081,65+ years,Male,White,Hispanic/Latino,Laboratory-confirmed case,12,0,Yes
+171,2020-12,UT,49,SALT LAKE,49035,50 to 64 years,Male,White,Non-Hispanic/Latino,Laboratory-confirmed case,1,0,Yes
+191,2020-12,NY,36,BRONX,36005,18 to 49 years,Female,NA,NA,Laboratory-confirmed case,0,0,Yes
+192,2020-12,OH,39,HAMILTON,39061,18 to 49 years,Female,White,Unknown,Laboratory-confirmed case,0,0,Yes
+264,2021-03,UT,49,UTAH,49049,18 to 49 years,Male,White,Non-Hispanic/Latino,Laboratory-confirmed case,0,0,Yes
+279,2020-12,NY,36,BRONX,36005,18 to 49 years,Female,NA,NA,Laboratory-confirmed case,1,0,Yes
+323,2020-11,OH,39,FRANKLIN,39049,18 to 49 years,Female,Black,Non-Hispanic/Latino,Laboratory-confirmed case,1,0,Yes
+374,2020-11,WA,53,SNOHOMISH,53061,18 to 49 years,Male,Asian,Non-Hispanic/Latino,Laboratory-confirmed case,3,0,Yes
+412,2020-11,OH,39,FRANKLIN,39049,18 to 49 years,Female,Black,Non-Hispanic/Latino,Laboratory-confirmed case,-19,38,Yes
+438,2021-01,TN,47,SHELBY,47157,50 to 64 years,Female,White,Non-Hispanic/Latino,Laboratory-confirmed case,0,0,Yes
+457,2020-12,NY,36,BRONX,36005,18 to 49 years,Female,NA,NA,Laboratory-confirmed case,0,0,Yes
+705,2021-01,TN,47,SHELBY,47157,50 to 64 years,Female,White,Non-Hispanic/Latino,Laboratory-confirmed case,0,0,Yes
+720,2021-10,NY,36,KINGS,36047,65+ years,Female,White,Non-Hispanic/Latino,Laboratory-confirmed case,0,0,Yes
+796,2021-01,TN,47,SHELBY,47157,50 to 64 years,Female,White,Non-Hispanic/Latino,Laboratory-confirmed case,1,0,Yes
+810,2021-10,NY,36,KINGS,36047,65+ years,Female,White,Non-Hispanic/Latino,Laboratory-confirmed case,0,1,Yes
+813,2020-12,NY,36,BRONX,36005,18 to 49 years,Female,NA,NA,Laboratory-confirmed case,1,0,Yes
+882,2021-01,TN,47,SHELBY,47157,50 to 64 years,Female,White,Non-Hispanic/Latino,Laboratory-confirmed case,0,0,Yes
