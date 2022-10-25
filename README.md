@@ -10,8 +10,10 @@ COVID-19 has affected nearly every person on this planet in at least one way sin
 ##  Communication Protocols
 A private Slack channel will be the primary means of communication along with online face-to-face meetings via Zoom in addition to alloted class time to check in and work through complex issues together. 
 
-Meeting 1: Tuesday, October 18, 9:00 pm
-Meeting 2: Wednesday, October 19, 8:00 pm
+Meeting 1: Tuesday, October 18, 9:00-9:45 pm
+Meeting 2: Wednesday, October 19, 8:00-9:00 pm
+Meeting 3: Thursday, October 20, 6:30-9:15 pm
+Meeting 4: Tuesday, October 25, 6:30-9:30 pm
 
 ## Technologies
 ### Tools
