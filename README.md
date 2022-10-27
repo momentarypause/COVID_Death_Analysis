@@ -92,7 +92,7 @@ Case-Surveillance-Public-Use-Data-with-Ge/n8mc-b4w4)
 - Loads ‘cdc_api_df_all.csv’
 - Cleans data, first pass
 - Exports ‘provisionaldb.csv’
-- Creates Postgres db ‘COVID_MSU
+- Creates pgAdmin db ‘COVID_MSU
 
 ### Preliminary Feature Engineering and Selection
 
