@@ -83,6 +83,16 @@ As a group we all thought this topic of missing data, removing records, etc. was
 While the API call of 250k records was still running, I examined small sample datasets of 1000 records each from the CDC dataset using functions and methods such as .head(), .describe(), .value_counts(), and .dtypes. This process guided me to write several small pieces of draft cleanup code on the small datasets that will then be repurposed in the production code to clean up the large dataset from the finished API call. I explored dropping a column/s, manipulating datetime into new columns, changing dtypes, removing records based on a value.  Feedback from Mandy and Brett was essential during this time to help suggest better code to use, suggest approaches, discuss which dataset(s?) to use and which question to answer. I feel we're all working really well together both in coming up with ideas and in grounding back to focus on the tasks at hand and next steps to take.
 
 
+1. ETL_E_API_Export.ipynb 
+- API call to https://data.cdc.gov/resource/n8mc-b4w4.json
+(from https://data.cdc.gov/Case-Surveillance/COVID-19-
+Case-Surveillance-Public-Use-Data-with-Ge/n8mc-b4w4)
+- Exported ‘cdc_api_df_all.csv’
+2. ETL_T&L.ipynb
+- Loads ‘cdc_api_df_all.csv’
+- Cleans data, first pass
+- Exports ‘provisionaldb.csv’
+- Creates Postgres db ‘COVID_MSU
 
 ### Preliminary Feature Engineering and Selection
 
