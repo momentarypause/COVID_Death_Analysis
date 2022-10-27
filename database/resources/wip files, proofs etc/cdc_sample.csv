@@ -1,0 +1,20 @@
+,case_month,res_state,state_fips_code,res_county,county_fips_code,age_group,sex,race,ethnicity,current_status,case_positive_specimen,case_onset_interval,underlying_conditions_yn
+13,2020-12,NY,36,BRONX,36005,18 to 49 years,Female,NA,NA,Laboratory-confirmed case,16,0,Yes
+81,2021-01,TN,47,SHELBY,47157,50 to 64 years,Female,White,Non-Hispanic/Latino,Laboratory-confirmed case,0,0,Yes
+97,2020-05,NY,36,QUEENS,36081,65+ years,Male,White,Hispanic/Latino,Laboratory-confirmed case,12,0,Yes
+171,2020-12,UT,49,SALT LAKE,49035,50 to 64 years,Male,White,Non-Hispanic/Latino,Laboratory-confirmed case,1,0,Yes
+191,2020-12,NY,36,BRONX,36005,18 to 49 years,Female,NA,NA,Laboratory-confirmed case,0,0,Yes
+192,2020-12,OH,39,HAMILTON,39061,18 to 49 years,Female,White,Unknown,Laboratory-confirmed case,0,0,Yes
+264,2021-03,UT,49,UTAH,49049,18 to 49 years,Male,White,Non-Hispanic/Latino,Laboratory-confirmed case,0,0,Yes
+279,2020-12,NY,36,BRONX,36005,18 to 49 years,Female,NA,NA,Laboratory-confirmed case,1,0,Yes
+323,2020-11,OH,39,FRANKLIN,39049,18 to 49 years,Female,Black,Non-Hispanic/Latino,Laboratory-confirmed case,1,0,Yes
+374,2020-11,WA,53,SNOHOMISH,53061,18 to 49 years,Male,Asian,Non-Hispanic/Latino,Laboratory-confirmed case,3,0,Yes
+412,2020-11,OH,39,FRANKLIN,39049,18 to 49 years,Female,Black,Non-Hispanic/Latino,Laboratory-confirmed case,-19,38,Yes
+438,2021-01,TN,47,SHELBY,47157,50 to 64 years,Female,White,Non-Hispanic/Latino,Laboratory-confirmed case,0,0,Yes
+457,2020-12,NY,36,BRONX,36005,18 to 49 years,Female,NA,NA,Laboratory-confirmed case,0,0,Yes
+705,2021-01,TN,47,SHELBY,47157,50 to 64 years,Female,White,Non-Hispanic/Latino,Laboratory-confirmed case,0,0,Yes
+720,2021-10,NY,36,KINGS,36047,65+ years,Female,White,Non-Hispanic/Latino,Laboratory-confirmed case,0,0,Yes
+796,2021-01,TN,47,SHELBY,47157,50 to 64 years,Female,White,Non-Hispanic/Latino,Laboratory-confirmed case,1,0,Yes
+810,2021-10,NY,36,KINGS,36047,65+ years,Female,White,Non-Hispanic/Latino,Laboratory-confirmed case,0,1,Yes
+813,2020-12,NY,36,BRONX,36005,18 to 49 years,Female,NA,NA,Laboratory-confirmed case,1,0,Yes
+882,2021-01,TN,47,SHELBY,47157,50 to 64 years,Female,White,Non-Hispanic/Latino,Laboratory-confirmed case,0,0,Yes

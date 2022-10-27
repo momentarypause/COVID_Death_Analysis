@@ -1,0 +1,51 @@
+,Unnamed: 0,Date_Onset,State,ST_Code,County,FIPS,Age_Range,Sex,Race,Ethnicity,Case_Positive_Specimen,Current_Status,Symptom_Status,Hosp_yn,ICU_yn,Death_yn,Date_Onset_Month,Date_Onset_Year
+1863,1863,2021-10-01,UT,49,SALT LAKE,49035.0,0 - 17 years,Male,White,Non-Hispanic/Latino,0,Laboratory-confirmed case,Symptomatic,False,False,False,10,2021
+107133,107133,2021-11-01,UT,49,SALT LAKE,49035.0,18 to 49 years,Male,Black,Non-Hispanic/Latino,0,Laboratory-confirmed case,Symptomatic,False,False,False,11,2021
+6029,6029,2020-12-01,KS,20,RILEY,20161.0,50 to 64 years,Male,White,Non-Hispanic/Latino,1,Laboratory-confirmed case,Symptomatic,False,False,False,12,2020
+105494,105494,2021-03-01,UT,49,SALT LAKE,49035.0,18 to 49 years,Female,White,Non-Hispanic/Latino,0,Laboratory-confirmed case,Symptomatic,False,False,False,03,2021
+39503,39503,2020-04-01,IA,19,MUSCATINE,19139.0,18 to 49 years,Female,White,Hispanic/Latino,0,Laboratory-confirmed case,Symptomatic,False,False,False,04,2020
+48765,48765,2020-12-01,UT,49,UTAH,49049.0,0 - 17 years,Female,White,Non-Hispanic/Latino,0,Laboratory-confirmed case,Symptomatic,False,False,False,12,2020
+53641,53641,2022-07-01,OH,39,PORTAGE,39133.0,18 to 49 years,Female,White,Non-Hispanic/Latino,0,Laboratory-confirmed case,Asymptomatic,True,False,False,07,2022
+89582,89582,2020-05-01,PA,42,CHESTER,42029.0,18 to 49 years,Female,White,Hispanic/Latino,0,Laboratory-confirmed case,Symptomatic,False,False,False,05,2020
+101291,101291,2020-12-01,NV,32,CLARK,32003.0,50 to 64 years,Male,White,Hispanic/Latino,1,Laboratory-confirmed case,Symptomatic,False,False,False,12,2020
+58140,58140,2021-10-01,OH,39,TUSCARAWAS,39157.0,65+ years,Male,White,Non-Hispanic/Latino,0,Laboratory-confirmed case,Symptomatic,False,False,False,10,2021
+38455,38455,2021-01-01,OH,39,HAMILTON,39061.0,18 to 49 years,Male,White,Hispanic/Latino,0,Laboratory-confirmed case,Symptomatic,False,False,False,01,2021
+20474,20474,2020-12-01,OH,39,STARK,39151.0,18 to 49 years,Female,White,Non-Hispanic/Latino,-34,Laboratory-confirmed case,Symptomatic,False,False,False,12,2020
+85190,85190,2020-10-01,UT,49,WEBER,49057.0,18 to 49 years,Male,White,Hispanic/Latino,0,Laboratory-confirmed case,Symptomatic,False,False,False,10,2020
+104421,104421,2020-07-01,NV,32,CLARK,32003.0,65+ years,Male,White,Non-Hispanic/Latino,0,Laboratory-confirmed case,Symptomatic,True,False,False,07,2020
+14080,14080,2021-12-01,KS,20,SEDGWICK,20173.0,65+ years,Male,White,Non-Hispanic/Latino,0,Laboratory-confirmed case,Symptomatic,True,False,False,12,2021
+15532,15532,2020-12-01,UT,49,SALT LAKE,49035.0,18 to 49 years,Male,White,Non-Hispanic/Latino,0,Laboratory-confirmed case,Symptomatic,False,False,False,12,2020
+107291,107291,2020-12-01,UT,49,SALT LAKE,49035.0,0 - 17 years,Male,White,Non-Hispanic/Latino,0,Laboratory-confirmed case,Symptomatic,False,False,False,12,2020
+97803,97803,2020-06-01,MN,27,ANOKA,27003.0,65+ years,Female,White,Non-Hispanic/Latino,0,Laboratory-confirmed case,Symptomatic,True,True,False,06,2020
+88995,88995,2020-06-01,UT,49,CACHE,49005.0,18 to 49 years,Female,White,Hispanic/Latino,0,Laboratory-confirmed case,Symptomatic,False,False,False,06,2020
+100673,100673,2020-11-01,OH,39,HAMILTON,39061.0,18 to 49 years,Female,White,Non-Hispanic/Latino,0,Laboratory-confirmed case,Symptomatic,False,False,False,11,2020
+58702,58702,2020-07-01,UT,49,SALT LAKE,49035.0,18 to 49 years,Male,White,Hispanic/Latino,1,Laboratory-confirmed case,Symptomatic,False,False,False,07,2020
+10898,10898,2021-12-01,KS,20,DOUGLAS,20045.0,18 to 49 years,Female,White,Non-Hispanic/Latino,0,Laboratory-confirmed case,Symptomatic,False,False,False,12,2021
+51741,51741,2020-12-01,PA,42,BUCKS,42017.0,0 - 17 years,Male,White,Non-Hispanic/Latino,1,Laboratory-confirmed case,Symptomatic,False,False,False,12,2020
+73089,73089,2021-02-01,OH,39,DEFIANCE,39039.0,18 to 49 years,Female,White,Non-Hispanic/Latino,0,Laboratory-confirmed case,Symptomatic,False,False,False,02,2021
+4990,4990,2022-01-01,UT,49,DAVIS,49011.0,18 to 49 years,Female,White,Non-Hispanic/Latino,0,Laboratory-confirmed case,Symptomatic,False,False,False,01,2022
+103844,103844,2022-06-01,UT,49,SALT LAKE,49035.0,18 to 49 years,Female,Asian,Non-Hispanic/Latino,0,Laboratory-confirmed case,Asymptomatic,False,False,False,06,2022
+54761,54761,2020-11-01,PA,42,LUZERNE,42079.0,18 to 49 years,Male,White,Hispanic/Latino,1,Laboratory-confirmed case,Symptomatic,False,False,False,11,2020
+4755,4755,2022-01-01,KS,20,RILEY,20161.0,18 to 49 years,Male,White,Non-Hispanic/Latino,0,Probable Case,Symptomatic,False,False,False,01,2022
+13537,13537,2020-10-01,PA,42,WESTMORELAND,42129.0,18 to 49 years,Female,White,Non-Hispanic/Latino,0,Laboratory-confirmed case,Symptomatic,False,False,False,10,2020
+76428,76428,2021-12-01,OH,39,FRANKLIN,39049.0,18 to 49 years,Male,White,Non-Hispanic/Latino,1,Probable Case,Symptomatic,False,False,False,12,2021
+105082,105082,2021-09-01,OH,39,TUSCARAWAS,39157.0,65+ years,Female,White,Non-Hispanic/Latino,1,Laboratory-confirmed case,Symptomatic,False,False,False,09,2021
+33472,33472,2021-08-01,KY,21,PULASKI,21199.0,50 to 64 years,Female,White,Non-Hispanic/Latino,1,Probable Case,Symptomatic,True,False,False,08,2021
+94440,94440,2020-12-01,PA,42,DELAWARE,42045.0,18 to 49 years,Female,Black,Non-Hispanic/Latino,1,Laboratory-confirmed case,Symptomatic,False,False,False,12,2020
+55501,55501,2021-11-01,NV,32,CLARK,32003.0,18 to 49 years,Male,White,Non-Hispanic/Latino,0,Laboratory-confirmed case,Symptomatic,False,False,False,11,2021
+79038,79038,2021-08-01,TN,47,CARROLL,47017.0,0 - 17 years,Male,White,Non-Hispanic/Latino,0,Probable Case,Symptomatic,False,False,False,08,2021
+77194,77194,2022-01-01,UT,49,SALT LAKE,49035.0,50 to 64 years,Male,White,Non-Hispanic/Latino,0,Laboratory-confirmed case,Symptomatic,False,False,False,01,2022
+91911,91911,2020-12-01,NV,32,CLARK,32003.0,18 to 49 years,Male,Black,Non-Hispanic/Latino,0,Laboratory-confirmed case,Symptomatic,False,False,False,12,2020
+40617,40617,2020-04-01,TN,47,DAVIDSON,47037.0,18 to 49 years,Female,White,Hispanic/Latino,1,Laboratory-confirmed case,Symptomatic,False,False,False,04,2020
+76325,76325,2020-11-01,OH,39,CLARK,39023.0,50 to 64 years,Female,White,Non-Hispanic/Latino,0,Laboratory-confirmed case,Symptomatic,False,False,False,11,2020
+66514,66514,2021-01-01,TN,47,COFFEE,47031.0,18 to 49 years,Female,White,Non-Hispanic/Latino,0,Probable Case,Symptomatic,False,False,False,01,2021
+24451,24451,2020-11-01,KS,20,FINNEY,20055.0,18 to 49 years,Male,White,Hispanic/Latino,1,Laboratory-confirmed case,Symptomatic,False,False,False,11,2020
+71657,71657,2021-08-01,OH,39,GUERNSEY,39059.0,50 to 64 years,Male,White,Non-Hispanic/Latino,0,Probable Case,Symptomatic,False,False,False,08,2021
+43688,43688,2020-07-01,UT,49,DAVIS,49011.0,18 to 49 years,Female,White,Non-Hispanic/Latino,0,Laboratory-confirmed case,Symptomatic,False,False,False,07,2020
+63611,63611,2020-12-01,OH,39,FRANKLIN,39049.0,18 to 49 years,Female,White,Non-Hispanic/Latino,0,Laboratory-confirmed case,Symptomatic,False,False,False,12,2020
+66002,66002,2021-06-01,UT,49,SEVIER,49041.0,18 to 49 years,Female,White,Non-Hispanic/Latino,0,Laboratory-confirmed case,Symptomatic,False,False,False,06,2021
+26760,26760,2020-11-01,UT,49,SANPETE,49039.0,0 - 17 years,Male,White,Non-Hispanic/Latino,0,Laboratory-confirmed case,Symptomatic,False,False,False,11,2020
+10869,10869,2020-05-01,UT,49,SALT LAKE,49035.0,65+ years,Female,White,Non-Hispanic/Latino,0,Laboratory-confirmed case,Symptomatic,False,False,False,05,2020
+2272,2272,2021-08-01,UT,49,WEBER,49057.0,18 to 49 years,Female,White,Non-Hispanic/Latino,1,Laboratory-confirmed case,Symptomatic,True,False,False,08,2021
+26306,26306,2020-07-01,IA,19,DUBUQUE,19061.0,18 to 49 years,Female,White,Non-Hispanic/Latino,0,Laboratory-confirmed case,Symptomatic,False,False,False,07,2020
+6055,6055,2021-02-01,NV,32,CLARK,32003.0,18 to 49 years,Female,White,Hispanic/Latino,1,Laboratory-confirmed case,Symptomatic,False,False,False,02,2021
