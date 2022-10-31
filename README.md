@@ -33,6 +33,8 @@ A private Slack channel will be the primary means of communication along with on
 ### Algorithms
 - Logistic Regression
 
+## PRESENTATION LINK
+https://docs.google.com/presentation/d/1mb-FrvVJSPmFRAVFaV_9wm2A9y0N-OhCBasbagVjU_E/edit?usp=sharing
 
 ## Questions to Answer
 - What factors contributed most heavily to the deaths of people who contracted COVID-19?  
@@ -40,7 +42,9 @@ A private Slack channel will be the primary means of communication along with on
 
 
 
-## Data Source
+## EXTRACT-TRANSFORM-LOAD
+
+### Data Source -EXTRACT
 https://data.cdc.gov/Case-Surveillance/COVID-19-Case-Surveillance-Public-Use-Data-with-Ge/n8mc-b4w4
 
 This dataset is a deidentified patient-level record of reported COVID-19 cases from January 1, 2020 to present, updated once per month.  There are currently 87.3 million rows and 19 columns.  It was selected because of its large record quantity, presumption of quality, and our belief that it should have good predictive qualities and plenty to explore. We liked this dataset in particular because it includes geographic data.  The dataset includes the following factors:
@@ -64,10 +68,30 @@ This dataset is a deidentified patient-level record of reported COVID-19 cases f
 - death
 - indication of underlying conditions (diabetes mellitus, hypertension, severe obesity (BMI>40), cardiovascular disease, chronic renal disease, chronic liver disease, chronic lung disease, other chronic diseases, immunosuppressive condition, autoimmune condition, current smoker, former smoker, substance abuse or misuse, disability, psychological/psychiatric, pregnancy, other)
 
+An API call was placed to https://data.cdc.gov/resource/n8mc-b4w4.json to extract the data from the link above and exported to a csv file (cdc_api_df_all.csv). This code is found in the file named ETL_E_API_Export.ipynb.  We chose to collect a large sample of records from the CDC and then drop any with NANs or values of "Unknown", "Missing", or "NA". Subsequent investigation with different samples of 1000 records showed anywhere from 1.5% - 3.3% of the records in a given dataset could remain post-cull. The code was adjusted to pull a total of 250,000 records from the API call as a precaution.
+
+As a group we all thought this topic of missing data, removing records, etc. was a fascinating topic and one we wanted more time to investigate, but felt it was probably outside the project's scope. We are interested in if/how our data collection method could skew our data. Are we doing everything properly with this approach, or is this level of record removal too much? This is the first "real world" scenario we've encountered, but we didn't imagine so much missing information!
+
+### Data Munging -TRANSFORM
+
+FINISH UPDATING
+While the API call of 250k records was still running, I examined small sample datasets of 1000 records each from the CDC dataset using functions and methods such as .head(), .describe(), .value_counts(), and .dtypes. This process guided me to write several small pieces of draft cleanup code on the small datasets that will then be repurposed in the production code to clean up the large dataset from the finished API call. I explored dropping a column/s, manipulating datetime into new columns, changing dtypes, removing records based on a value.  Feedback from Mandy and Brett was essential during this time to help suggest better code to use, suggest approaches, discuss which dataset(s?) to use and which question to answer. I feel we're all working really well together both in coming up with ideas and in grounding back to focus on the tasks at hand and next steps to take.
 
 
-## Database
-The preliminary database is a small sample of 300 records from the main dataset, saved into a csv file. This was read into the machine learning model as a test after using label encoder to numerize the categorical data. 
+2. ETL_T&L.ipynb
+- Loads ‘cdc_api_df_all.csv’
+- Cleans data, first pass
+- Exports ‘provisionaldb.csv’
+- Creates pgAdmin db ‘COVID_MSU
+
+### Database -LOAD
+INSERT DATABASE SCREENSHOTS of main and tables
+
+
+## Data Exploration Phase
+Once the database and its tables were created, we were able to export them into CSVs and perform data exploration and visualization on them.
+
+## Analysis Phase
 
 
 ## Machine Learning Model
@@ -75,24 +99,7 @@ The machine learning model we chose for this project is a Logistic Regression Mo
 
 ### Limitations and Benefits
 
-### Preliminary Data Preporocessing
-In examining the data (ETL.ipynb contains beginning data exploration code, as well as drafts for 'production' files) I noticed that nearly all records in the data contained some form of missing information. When Mandy, Brett, and I met outside of class hours to discuss the project, we took up this topic under the database as a whole. We chose to collect a large sample of records from the CDC and then drop any with NANs or values of "Unknown", "Missing", or "NA". Subsequent investigation with different samples of 1000 records showed anywhere from 1.5% - 3.3% of the records in a given dataset could remain post-cull. I adjusted code to pull a total of 250,000 records from the API call as a precaution and buckled in for a fun night with my trusty computer.
-
-As a group we all thought this topic of missing data, removing records, etc. was a fascinating topic and one we wanted more time to investigate, but felt it was probably outside the project's scope. I know we are interested, however, in if/how our data collection method could skew our data. Are we doing everything properly with this approach, or is this level of record removal too much? This is the first "real world" scenario we've encountered, but we didn't imagine so much missing information!
-
-While the API call of 250k records was still running, I examined small sample datasets of 1000 records each from the CDC dataset using functions and methods such as .head(), .describe(), .value_counts(), and .dtypes. This process guided me to write several small pieces of draft cleanup code on the small datasets that will then be repurposed in the production code to clean up the large dataset from the finished API call. I explored dropping a column/s, manipulating datetime into new columns, changing dtypes, removing records based on a value.  Feedback from Mandy and Brett was essential during this time to help suggest better code to use, suggest approaches, discuss which dataset(s?) to use and which question to answer. I feel we're all working really well together both in coming up with ideas and in grounding back to focus on the tasks at hand and next steps to take.
-
-
-1. ETL_E_API_Export.ipynb 
-- API call to https://data.cdc.gov/resource/n8mc-b4w4.json
-(from https://data.cdc.gov/Case-Surveillance/COVID-19-
-Case-Surveillance-Public-Use-Data-with-Ge/n8mc-b4w4)
-- Exported ‘cdc_api_df_all.csv’
-2. ETL_T&L.ipynb
-- Loads ‘cdc_api_df_all.csv’
-- Cleans data, first pass
-- Exports ‘provisionaldb.csv’
-- Creates pgAdmin db ‘COVID_MSU
+### Preliminary Data Preprocessing
 
 ### Preliminary Feature Engineering and Selection
 
@@ -102,10 +109,24 @@ Case-Surveillance-Public-Use-Data-with-Ge/n8mc-b4w4)
 
 
 
-## Data Exploration
-
-
-## Analysis
+## Dashboards
+The dashboards will be created using Tableau, a visual analytics platform built to take in multiple data sets and allows for nearly code-free visualizations of that data.  It will include the following dashboards organized into perspectives.  This will allow for more visualizations without crowding them onto one viewing space.
+### Date dashboard
+- Factors by month
+    - Bar Graph -stacking
+    - Filterable by year and factor
+- Counts over time
+    - Line Graph
+    - Filterable by factor to show one or more factors at a time
+### Geographical dashboard
+- Factors by Census Region
+    - Bar Graph
+    - Filterable by factor to show one or more factors at a time by US Census region
+- Factors by State and County
+    - Table
+    - Filterable by state, county, factor
+- Deaths by State
+    - Geographical heat map showing which states had the highest deaths by color intensity
 
 
 
