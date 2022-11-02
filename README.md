@@ -15,6 +15,8 @@ A private Slack channel will be the primary means of communication along with on
 - Meeting 3: Thursday, October 20, 6:30-9:15 pm 
 - Meeting 4: Tuesday, October 25, 7:00-9:00 pm
 - Meeting 5: Thursday, October 27, 7:00-9:00 pm
+- Meeting 6: Tuesday, November 1, 1:00-2:30 pm
+- Meeting 7: Tuesday, November 1, 7:00-9:30 pm
 
 ## Technologies
 ### Tools
@@ -30,6 +32,8 @@ A private Slack channel will be the primary means of communication along with on
 - Numpy
 - Pathlib
 - sklearn
+- sqlalchemy
+- psycopg2
 ### Algorithms
 - Logistic Regression
 
@@ -68,21 +72,28 @@ This dataset is a deidentified patient-level record of reported COVID-19 cases f
 - death
 - indication of underlying conditions (diabetes mellitus, hypertension, severe obesity (BMI>40), cardiovascular disease, chronic renal disease, chronic liver disease, chronic lung disease, other chronic diseases, immunosuppressive condition, autoimmune condition, current smoker, former smoker, substance abuse or misuse, disability, psychological/psychiatric, pregnancy, other)
 
-An API call was placed to https://data.cdc.gov/resource/n8mc-b4w4.json to extract the data from the link above and exported to a csv file (cdc_api_df_all.csv). This code is found in the file named ETL_E_API_Export.ipynb.  We chose to collect a large sample of records from the CDC and then drop any with NANs or values of "Unknown", "Missing", or "NA". Subsequent investigation with different samples of 1000 records showed anywhere from 1.5% - 3.3% of the records in a given dataset could remain post-cull. The code was adjusted to pull a total of 250,000 records from the API call as a precaution.
+An API call was placed to https://data.cdc.gov/resource/n8mc-b4w4.json to extract the data from the link above and exported to a csv file (cdc_api_df_all.csv). This code is found in the file named ETL_E_API_Export.ipynb.  
+
+We chose to collect a large sample of records from the CDC and then drop any with NANs or values of "Unknown", "Missing", or "NA". Subsequent investigation with different samples of 1000 records showed anywhere from 1.5% - 3.3% of the records in a given dataset could remain post-cull. The code was adjusted to pull a total of 250,000 records from the API call as a precaution.
 
 As a group we all thought this topic of missing data, removing records, etc. was a fascinating topic and one we wanted more time to investigate, but felt it was probably outside the project's scope. We are interested in if/how our data collection method could skew our data. Are we doing everything properly with this approach, or is this level of record removal too much? This is the first "real world" scenario we've encountered, but we didn't imagine so much missing information!
 
+
+
 ### Data Munging -TRANSFORM
 
-FINISH UPDATING
-While the API call of 250k records was still running, I examined small sample datasets of 1000 records each from the CDC dataset using functions and methods such as .head(), .describe(), .value_counts(), and .dtypes. This process guided me to write several small pieces of draft cleanup code on the small datasets that will then be repurposed in the production code to clean up the large dataset from the finished API call. I explored dropping a column/s, manipulating datetime into new columns, changing dtypes, removing records based on a value.  Feedback from Mandy and Brett was essential during this time to help suggest better code to use, suggest approaches, discuss which dataset(s?) to use and which question to answer. I feel we're all working really well together both in coming up with ideas and in grounding back to focus on the tasks at hand and next steps to take.
+The initial data cleanup effort (found in ETL_T&L.ipynb) occured while the API call of 250k records was still running.  Small sample datasets of 1000 records each from the CDC dataset were pulled into data frames and explored using functions and methods such as .head(), .describe(),.value_counts(), and .dtypes. This process guided several small pieces of draft cleanup code with the intention to repurpose them in the production code.
 
+After the initial exploration, several other methods of data wrangling were used in preparation for data analysis: dropping a column/s, manipulating datetime into new columns, changing dtypes, and removing records based on a value.  The team collaborated to suggest better code to use, suggest different approaches, finalize the dataset, and narrow down which questions to explore. 
 
 2. ETL_T&L.ipynb
 - Loads ‘cdc_api_df_all.csv’
 - Cleans data, first pass
 - Exports ‘provisionaldb.csv’
 - Creates pgAdmin db ‘COVID_MSU
+
+#### Observations and Limitations of the Data
+- Geographical distriibution is uneven.  The original API call that pulled approximately 112,000 records only pulled one record each from several states.  After data cleanup, many of these states were eliminated due to missing values to the point we were only left with representation from about 20 states.  When broken into regions, this evened out more, however, the dataset as a whole is not representational of each state.
 
 ### Database -LOAD
 INSERT DATABASE SCREENSHOTS of main and tables
@@ -134,3 +145,5 @@ The dashboards will be created using Tableau, a visual analytics platform built 
 Considering we were only able to retain a very small percentage of the original data once null/missing/NA values were removed, an interesting exploration would be WHY those values are missing.  Did providers from a certain region/state/county routinely underreport their patient information?  Did patients from one ethnicity or race have more or less information included about their case?  What does that say about the healthcare system or providers in the United States?
 
 ## Project Reflections
+Teamwork
+"We're all working really well together both in coming up with ideas and in grounding back to focus on the tasks at hand and next steps to take."
