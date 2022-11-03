@@ -17,6 +17,7 @@ A private Slack channel will be the primary means of communication along with on
 - Meeting 5: Thursday, October 27, 7:00-9:00 pm
 - Meeting 6: Tuesday, November 1, 1:00-2:30 pm
 - Meeting 7: Tuesday, November 1, 7:00-9:30 pm
+- Meeting 8: Wednesday, November 2, 2:15-5:00 pm
 
 ## Technologies
 ### Tools
@@ -36,6 +37,7 @@ A private Slack channel will be the primary means of communication along with on
 - psycopg2
 ### Algorithms
 - Logistic Regression
+- SMOTEENN
 
 ## PRESENTATION LINK
 https://docs.google.com/presentation/d/1mb-FrvVJSPmFRAVFaV_9wm2A9y0N-OhCBasbagVjU_E/edit?usp=sharing
@@ -86,42 +88,89 @@ The initial data cleanup effort (found in ETL_T&L.ipynb) occured while the API c
 
 After the initial exploration, several other methods of data wrangling were used in preparation for data analysis: dropping a column/s, manipulating datetime into new columns, changing dtypes, and removing records based on a value.  The team collaborated to suggest better code to use, suggest different approaches, finalize the dataset, and narrow down which questions to explore. 
 
-2. ETL_T&L.ipynb
-- Loads ‘cdc_api_df_all.csv’
-- Cleans data, first pass
-- Exports ‘provisionaldb.csv’
-- Creates pgAdmin db ‘COVID_MSU
 
 #### Observations and Limitations of the Data
 - Geographical distriibution is uneven.  The original API call that pulled approximately 112,000 records only pulled one record each from several states.  After data cleanup, many of these states were eliminated due to missing values to the point we were only left with representation from about 20 states.  When broken into regions, this evened out more, however, the dataset as a whole is not representational of each state.
 
+-- SCREENSHOT OF STATE DISTRIBUTION COUNTS AFTER CLEANUP
+
 ### Database -LOAD
-INSERT DATABASE SCREENSHOTS of main and tables
+-- DATABASE SCREENSHOTS of main and tables
 
 
 ## Data Exploration Phase
-Once the database and its tables were created, we were able to export them into CSVs and perform data exploration and visualization on them.
+Initial data exploration was conducted in pgAdmin in the creation of the county_counts table and the total_deaths table.  The county_counts table counted the number of hospitalizations, ICU admissions, and deaths and compiled them into one table, grouped by county.  This exploration made it apparent that we lost much of the data that would have made the sample truly representative, as there were many fewer counties than the population represented.  
+
+-- SCREENSHOT OF county_counts TABLE
+
+The total_deaths table represents the number of deaths by month (all years combined) to get a picture of the "deadliest months."  
+
+-- SCREENSHOT OF total_deaths TABLE
+
+Also created using SQL was an additional table called cdc_df_regions that added another column and used conditionals to populate the US Census region for each case.  We discovered this was needed when thinking about the visualizations and the desire to break data up into the regions of the United States to compare them all together instead of using separate region tables as created initially.  Once the database and its tables were created, we were able to export cdc_df_regions into a csv file and perform data exploration and visualization in Tableau.
 
 ## Analysis Phase
-
+Most of the analysis was conducted using Tableau, a visual analytics platform built to take in multiple data sets and allows for nearly code-free visualizations of that data.  Age Range, Hospitalization Status, ICU Admission Status, Race, US Census Region, Sex, and Symptom Status were taken into consideration and compared with the total death count to visualize any correlation.  These tables are detailed below in the Dashboards section.
 
 ## Machine Learning Model
-The machine learning model we chose for this project is a Logistic Regression Model because it will categorize the results into two parts: death-yes or death-no. This will effectively answer the question if COVID deaths can be predicted based on several factors or underlying conditions.
+Logistic Regression was chosen because there was a specific target that was being predicted, and the actual outcomes were known. Therefore, Supervised machine learning is the best option. Since death has a binary outcome, either the person died or they did not, Logistic regression made sense with its ability to predict binary outcomes. 
 
-### Limitations and Benefits
 
 ### Preliminary Data Preprocessing
+After loading in the data from the SQL database, the new dataframe was printed to inspect the columns and data types. Pandas get dummies method was used to change all categorical columns so that it would be able to be analyzed by the machine learning model. Label encoder was used from the SKLearn Library one other columns that used string types such as True and False to switch it to numerical data types. Columns that were not useful for the machine learning model were dropped from the dataframe. 
 
 ### Preliminary Feature Engineering and Selection
+Since the main question for the project was to use data from the CDC to predict death based off factors such as hospitalization, sex, ethnicity, and symptom status, the target selection was clearly the Death column. The remaining features were used as features for the machine learning model, except for the duplicate index columns and the state code, which was already represented from the state column.  Leaving county and state as features will allow for future analysis on whether geographic location had an impact on Covid deaths. 
 
 ### Training and Testing
+Data was split into training and testing with the Train_test_split function from the SKLearn library with the default options. After noticing the balance of the target outcomes, the data was also resampled using the SMOTEEN sampling algorithm from the IMBLearn library. 
+
+### Limitations and Benefits
+The limitations include the possibility of overfitting the data, and new data would not be as predictable. Another limitation is that the logistic regression model is not as complex or robust as neural networks or deep learning models. 
 
 ### Accuracy Score
 
 
 
 ## Dashboards
-The dashboards will be created using Tableau, a visual analytics platform built to take in multiple data sets and allows for nearly code-free visualizations of that data.  It will include the following dashboards organized into perspectives.  This will allow for more visualizations without crowding them onto one viewing space.
+The dashboards will be created using Tableau.  It will include the following dashboards organized into perspectives.  This will allow for more visualizations without crowding them onto one viewing space.
+
+The link to the Tableau Worksheets and Dashboards is https://public.tableau.com/app/profile/mandy.glynn/viz/COVIDAnalysis_16675052127620/Reg_Hosp?publish=yes
+
+### Distribution Dashboard
+- Distribution of Cases by Region and Year
+    - Packed Bubbles
+    - Shows a comparison of bubble size of total cases for each region and each year
+    - Filterable by Death Y/N to see the same comparison of those who died
+- Distribution by Sex
+    - Pie Graph
+    - Shows total cases broken up by Male and Female (the "other" category was eliminated for null or missing values during data cleanup)
+    - Filterable by Death Y/N to see the same comparison of those who died
+- Distribution by Race
+    - Horizontal Bar Graph
+    - Shows total cases broken up by race
+    - Filterable by Death Y/N to see the same comparison of those who died
+- Distribution of Cases by Symptomatic vs. Asymptomatic
+    - Chart
+    - Shows total cases broken up by Asymptomatic and Symptomatic status
+    - Filterable by Death Y/N to see the same comparison of those who died
+- Distribution by Age Range
+    - Treemap
+    - Shows comparison of number of cases broken into age ranges
+    - Filterable by Death Y/N to see the same comparison of those who died
+### Age and Race Dashboard
+- Hospitalized by Age and Race
+    - Bar Graph
+    - Shows a breakdown of total cases where the patient was hospitalized by age range and race
+    - Filterable by Death Y/N to see how many in each category died while hospitalized
+- ICU Admissions by Age and Race
+    - Bar Graph
+    - Shows a breakdown of total cases where the patient was admitted to the ICU by age range and race
+    - Filterable by Death Y/N to see how many in each category died while in the ICU
+- Deaths by Age and Race
+    - Bar Graph
+    - Shows a breakdown of total deaths by age range and race
+    - Filter is set to Death Yn: True
 ### Date dashboard
 - Factors by month
     - Bar Graph -stacking
@@ -130,14 +179,12 @@ The dashboards will be created using Tableau, a visual analytics platform built 
     - Line Graph
     - Filterable by factor to show one or more factors at a time
 ### Geographical dashboard
-- Factors by Census Region
-    - Bar Graph
-    - Filterable by factor to show one or more factors at a time by US Census region
-- Factors by State and County
-    - Table
-    - Filterable by state, county, factor
-- Deaths by State
-    - Geographical heat map showing which states had the highest deaths by color intensity
+- Hospitalization, ICU, and Death by Census Region
+    - 3 Bar Graphs
+    - Each graph is filterable by death status to compare how many hospitalization and icu cases in each region resulted in death 
+- Death Count by Location
+    - Geographical map showing which states had the highest deaths by circle size
+
 
 
 
@@ -145,5 +192,8 @@ The dashboards will be created using Tableau, a visual analytics platform built 
 Considering we were only able to retain a very small percentage of the original data once null/missing/NA values were removed, an interesting exploration would be WHY those values are missing.  Did providers from a certain region/state/county routinely underreport their patient information?  Did patients from one ethnicity or race have more or less information included about their case?  What does that say about the healthcare system or providers in the United States?
 
 ## Project Reflections
-Teamwork
+### Teamwork
 "We're all working really well together both in coming up with ideas and in grounding back to focus on the tasks at hand and next steps to take."
+
+### We wish we could have...
+In hindsight we would have liked a more representative sampling of the data as the large number of null and values marked as "missing" culled the majority of the rows.  This was difficult given the limitations of personal computers with limited processing power.  It took two full days of running the API call to pull 250,000 records, of which 2,800 were filled out enough to keep for analysis.  Had this been completed with more powerful machines, such as might be found in the corporate setting, we feel we would be able to pull a larger dataset in a shorter time and been able to retain more records.
