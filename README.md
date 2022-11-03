@@ -95,11 +95,29 @@ After the initial exploration, several other methods of data wrangling were used
 -- SCREENSHOT OF STATE DISTRIBUTION COUNTS AFTER CLEANUP
 
 ### Database -LOAD
--- DATABASE SCREENSHOTS of main and tables
+
+A number of tables were created to make manipulation of data easier.  The following tables were created to filter the data and are not pictured:
+- cases_by_region_midwest
+- cases_by_region_northeast
+- cases_by_region_south
+- cases_by_region_west
+- cases_by_sex_female
+- cases_by_sex_male
+- cdc_df_regions
+- counties_and_codes
+- states_and_codes
+- zero_to_17
+- eighteen_to_49
+- fifty_to_64
+- sixtyfive_plus
+- lab_confirmed_cases
+- probable_cases
+
+
 
 
 ## Data Exploration Phase
-Initial data exploration was conducted in pgAdmin in the creation of the county_counts table and the total_deaths table.  The county_counts table counted the number of hospitalizations, ICU admissions, and deaths and compiled them into one table, grouped by county.  This exploration made it apparent that we lost much of the data that would have made the sample truly representative, as there were many fewer counties than the population represented.  
+Initial data exploration was conducted in pgAdmin in the creation of the county_counts table and the total_deaths table.  Three tables were created to count the number of hospitalizations, ICU admissions, and deaths.  Two inner joins were then performed to combine the information into one table, grouped by county.  The SQL code to duplicate this is found in the file tables.sql.  This exploration made it apparent that we lost much of the data that would have made the sample truly representative, as there were many fewer counties than the population represented.  
 
 -- SCREENSHOT OF county_counts TABLE
 
@@ -111,6 +129,8 @@ Also created using SQL was an additional table called cdc_df_regions that added 
 
 ## Analysis Phase
 Most of the analysis was conducted using Tableau, a visual analytics platform built to take in multiple data sets and allows for nearly code-free visualizations of that data.  Age Range, Hospitalization Status, ICU Admission Status, Race, US Census Region, Sex, and Symptom Status were taken into consideration and compared with the total death count to visualize any correlation.  These tables are detailed below in the Dashboards section.
+
+### Observations
 
 ## Machine Learning Model
 Logistic Regression was chosen because there was a specific target that was being predicted, and the actual outcomes were known. Therefore, Supervised machine learning is the best option. Since death has a binary outcome, either the person died or they did not, Logistic regression made sense with its ability to predict binary outcomes. 
