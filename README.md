@@ -18,6 +18,7 @@ A private Slack channel will be the primary means of communication along with on
 - Meeting 6: Tuesday, November 1, 1:00-2:30 pm
 - Meeting 7: Tuesday, November 1, 7:00-9:30 pm
 - Meeting 8: Wednesday, November 2, 2:15-5:00 pm
+- Meeting 9: Thursday, November 3, 6:30-9:30 pm
 
 ## Technologies
 ### Tools
@@ -84,19 +85,42 @@ As a group we all thought this topic of missing data, removing records, etc. was
 
 ### Data Munging -TRANSFORM
 
-The initial data cleanup effort (found in ETL_T&L.ipynb) occured while the API call of 250k records was still running.  Small sample datasets of 1000 records each from the CDC dataset were pulled into data frames and explored using functions and methods such as .head(), .describe(),.value_counts(), and .dtypes. This process guided several small pieces of draft cleanup code with the intention to repurpose them in the production code.
+The initial data cleanup effort (found in ETL_T&L.ipynb, which loads the raw API data, cleans it, and ultimately imports it into our database) occured while the API call of 250k records was still running.  Small sample datasets of 1000 records each from the CDC dataset were pulled into data frames and explored using functions and methods such as .head(), .describe(),.value_counts(), and .dtypes. This process guided several small pieces of draft cleanup code with the intention to repurpose them in the production code.
 
 After the initial exploration, several other methods of data wrangling were used in preparation for data analysis: dropping a column/s, manipulating datetime into new columns, changing dtypes, and removing records based on a value.  The team collaborated to suggest better code to use, suggest different approaches, finalize the dataset, and narrow down which questions to explore. 
 
+While doing final housekeeping, I noticed negative values populating the 'case_positive_specimen' feature for the first time. Given this feature's definition of 'Weeks between earliest date and date of first positive specimen collection' I decided these values warranted removal, and that all of the rest of my columns warranted a second .value_counts().
+
+The second look proved fruitful; our cleaned dataset began revealing itself in ways it hadn't before. Or, more accurately, in ways I hadn't allowed it to yet. For example, records of patients residing in Utah, Ohio, Pennsylvania, and Kansas comprise 71.55% of the dataset, compared with only 20.04% of the raw API-called data. Futhermore, our final set contains records of patients residing in 19 unique states or territories, while the raw set, 45.
+
+The implications of these observations and those of our constraints in obtaining the data are potentially enormous. Due to the slow speed of the API call, we were only able to call 250k records out of 87.3M, of which we only received 111,945 (a 0.13% sample of all of the data), which was then further reduced through the ETL process to 2,875 records... and now I don't know about anyone else in the room, but this kind of math hurts my brain a bit: these 2,875 records are a 2.57% sample of our first sample of 111,945 records -- which means they're only a 0.0033% sample of the original 87.3 million records from the CDC!
+
+If we had more time, I would work my hardest to figure out why I can make a single API 'ping' to the CDC and get 1,000 records in what seems like instant, but specifying the number I'm wanting (even 1,000) takes exponentially longer.
+
+I think the heart of the matter is most likely that our data collection process ran too short for me to collect enough records given the speed at which the API ran (2.5 days for 250k records) and therefore cleaning the data left us with some skewed observations.
+
+Despite these observations, we kept moving forward so as to not fall behind on our deliverables. And logically, if turns out that we need to redo steps 2 or 3 in the pipeline, it will still make sense to have steps 1 and 4:25 complete so that everything plugs in.
+
+After creating our database in pgAdmin (essentially just naming it 'COVID_MSU'), I added our code in Jupyter Notebook to create the connection between it and our clean dataset and its new database home.
+
 
 #### Observations and Limitations of the Data
-- Geographical distriibution is uneven.  The original API call that pulled approximately 112,000 records only pulled one record each from several states.  After data cleanup, many of these states were eliminated due to missing values to the point we were only left with representation from about 20 states.  When broken into regions, this evened out more, however, the dataset as a whole is not representational of each state.
+- Geographical distriibution is uneven.  The original API call only pulled one record each from several states.  After data cleanup, many of these states were eliminated due to missing values to the point we were only left with representation from about 20 states.  When broken into regions, this evened out more, however, the dataset as a whole is not representational of each state.
 
--- SCREENSHOT OF STATE DISTRIBUTION COUNTS AFTER CLEANUP
+![](Images/.png)
 
 ### Database -LOAD
+![](Images/database_main.png)
 
-A number of tables were created to make manipulation of data easier.  The following tables were created to filter the data and are not pictured:
+This code is really cool. It takes our finished, cleaned dataset from our Jupyter Notebook file and pushes it right inside our new, empty database in pgAdmin.  It does this by first importing dependencies that allow us to create database engines, connections, and adaptors (fancy speak for all the tools we need to make this process possible). Next, we create "db_string", and since we are creating an engine, I like to think of 'db_string' as the key. It holds text containing a lot of information and instructions about our database, including its name, location, login credentials, and SQL flavor/dialect. So with all of this information complete within 'db_string', our code of 'engine = create_engine(db_string)' allows our program to point directly to the database called 'COVID_MSU' and interact with it using the 'engine' variable. The final line of code takes all of the data from our 'cdc_df1' DataFrame (or dataset, as I've been referring to it), and passes it to the to_sql() method. This line is a little friendlier, so one can almost read it left-to-right to see that our data frame is being converted to SQL as the table name 'cdc_df_import', using 'engine' as the connector/instantiatior, and replacing itself should it already be found.
+
+The actual process moves much faster than I just described! In less than a second, we had our basic database!  This code and tables.sql was then sent to the other team members to create the database on their machines so they had easy access to the data as well.
+
+![](Images/county_counts.png)
+
+It may also make the most sense now to note that very similar code is run to reverse this process to allow for an integration *from* the database *to* Jupyter Notebook for our logistic regression analysis. In his machine learning model, Brett will import the same dependencenies, and the same first two lines of 'connector code' creating 'db_string' and 'engine', making any changes particular to his pgAdmin/postgres credentials. However, the final line of code creates a DataFrame using a pandas method called 'read_sql_query()', which uses SQL to read from our specified database table via the 'engine' connection. I believe Brett is including this example within his ML code.
+
+So from here, we created a series of tables in the database to both explore and help analyze trends in our data.  The following tables were created to filter the data and are not pictured though the code to create them is found in tables.sql:
 - cases_by_region_midwest
 - cases_by_region_northeast
 - cases_by_region_south
@@ -114,23 +138,44 @@ A number of tables were created to make manipulation of data easier.  The follow
 - probable_cases
 
 
-
-
 ## Data Exploration Phase
+After spending time building the code to create our tables and looking through them, we began digging into them, but soon realized each category from the main data table (like age_range, for example) had been transformed into a series of tables aggregating unique category values (a table of records of 0-17 ages, one for 18-49 ages, etc.). In contrast, we only had a single table, 'region', where we instead took many state location values and categorized them into fewer. We instead thought, why not add 'region' on to our original table, save it as a new table by using conditionals to populate the US Census region for each case, and then use that data in Tableau to analyze our data?  This table is called cdc_df_regions.  We discovered this was needed when thinking about the visualizations and the desire to break data up into the regions of the United States to compare them all together instead of using separate region tables as created initially. 
+
 Initial data exploration was conducted in pgAdmin in the creation of the county_counts table and the total_deaths table.  Three tables were created to count the number of hospitalizations, ICU admissions, and deaths.  Two inner joins were then performed to combine the information into one table, grouped by county.  The SQL code to duplicate this is found in the file tables.sql.  This exploration made it apparent that we lost much of the data that would have made the sample truly representative, as there were many fewer counties than the population represented.  
 
--- SCREENSHOT OF county_counts TABLE
+![](Images/county_counts.png)
 
 The total_deaths table represents the number of deaths by month (all years combined) to get a picture of the "deadliest months."  
 
--- SCREENSHOT OF total_deaths TABLE
+![](Images/total_deaths.png)
 
-Also created using SQL was an additional table called cdc_df_regions that added another column and used conditionals to populate the US Census region for each case.  We discovered this was needed when thinking about the visualizations and the desire to break data up into the regions of the United States to compare them all together instead of using separate region tables as created initially.  Once the database and its tables were created, we were able to export cdc_df_regions into a csv file and perform data exploration and visualization in Tableau.
+ Once the database and its tables were created, we were able to export cdc_df_regions into a csv file and perform data exploration and visualization in Tableau.
 
 ## Analysis Phase
 Most of the analysis was conducted using Tableau, a visual analytics platform built to take in multiple data sets and allows for nearly code-free visualizations of that data.  Age Range, Hospitalization Status, ICU Admission Status, Race, US Census Region, Sex, and Symptom Status were taken into consideration and compared with the total death count to visualize any correlation.  These tables are detailed below in the Dashboards section.
 
 ### Observations
+- Distribution of cases by region/year
+        - We saw that the West coast contained the most deaths by year during our dataset. Of course, with the caveat that our current geographical data isn't representative of the US as a whole, and therefore, most likely not of any statistical use.
+- Distribution by Sex
+        - Our dataset contains more females, above 50%, while men comprised over 50% of the deaths.
+- Distribution by Race
+        - The vast majority of fully-filled-out records (or, to put it another way, what remained from Andy's cleaning) belonged to Caucasian individuals. We unfortunately don't really have the data to draw any conclusions from this observation, only that we noticed it and it would be fascinating to conduct additional analysis into the finding.
+- Symptomatic vs Asymptomatic
+        - 5% of the deaths in our dataset were from asymptomatic cases.
+- Distribution of cases by age range
+        - Most cases in our dataset were records marked in the 18-49 age range, however, 64 out of our 66 deaths belonged to records marked in the 65+ age range.
+- Hospitalization by age/race
+        - We again found the 18 to 49 age group interesting for a number of reasons:
+                - it contains largest count of records
+                - it is largest range of years grouped (30, while some are less than half that amount)
+                - it also has the most racial groups captured
+        - We noticed the majority of deaths came from elder caucasians
+- Icu Admissions by age/race
+        - while 15 from 18-49 were admitted to the ICU, none passed
+- All Geographic Visualizations
+        - We developed a great series of geographic visualization tools here to do a more robust analysis if we can work in the time to obtain a more distributed geographical dataset.
+
 
 ## Machine Learning Model
 Logistic Regression was chosen because there was a specific target that was being predicted, and the actual outcomes were known. Therefore, Supervised machine learning is the best option. Since death has a binary outcome, either the person died or they did not, Logistic regression made sense with its ability to predict binary outcomes. 
@@ -143,13 +188,13 @@ After loading in the data from the SQL database, the new dataframe was printed t
 Since the main question for the project was to use data from the CDC to predict death based off factors such as hospitalization, sex, ethnicity, and symptom status, the target selection was clearly the Death column. The remaining features were used as features for the machine learning model, except for the duplicate index columns and the state code, which was already represented from the state column.  Leaving county and state as features will allow for future analysis on whether geographic location had an impact on Covid deaths. 
 
 ### Training and Testing
-Data was split into training and testing with the Train_test_split function from the SKLearn library with the default options. After noticing the balance of the target outcomes, the data was also resampled using the SMOTEEN sampling algorithm from the IMBLearn library. 
+Data was split into training and testing with the Train_test_split function from the SKLearn library with the default options. Stratify=y was used to ensure that when the data was split into training and testing sets that a proportional amount of the target variable would be distributed among each.  After noticing the balance of the target outcomes, the data was also resampled using the SMOTEEN sampling algorithm from the IMBLearn library. 
 
 ### Limitations and Benefits
 The limitations include the possibility of overfitting the data, and new data would not be as predictable. Another limitation is that the logistic regression model is not as complex or robust as neural networks or deep learning models. 
 
 ### Accuracy Score
-
+COMING SOON!
 
 
 ## Dashboards
@@ -191,7 +236,7 @@ The link to the Tableau Worksheets and Dashboards is https://public.tableau.com/
     - Bar Graph
     - Shows a breakdown of total deaths by age range and race
     - Filter is set to Death Yn: True
-### Date dashboard
+### UNDER CONSTRUCTION...Date dashboard...UNDER CONSTRUCTION
 - Factors by month
     - Bar Graph -stacking
     - Filterable by year and factor
