@@ -107,9 +107,11 @@ After creating our database in pgAdmin (essentially just naming it 'COVID_MSU'),
 #### Observations and Limitations of the Data
 - Geographical distriibution is uneven.  The original API call only pulled one record each from several states.  After data cleanup, many of these states were eliminated due to missing values to the point we were only left with representation from about 20 states.  When broken into regions, this evened out more, however, the dataset as a whole is not representational of each state.
 
-![](Images/.png)
+![](Images/state_counts.png)
 
 ### Database -LOAD
+![](database/resources/integration_dependencies.PNG)
+![](database/resources/data_push_to_pgadmin.PNG)
 
 This code is really cool. It takes our finished, cleaned dataset from our Jupyter Notebook file and pushes it right inside our new, empty database in pgAdmin.  It does this by first importing dependencies that allow us to create database engines, connections, and adaptors (fancy speak for all the tools we need to make this process possible). Next, we create "db_string", and since we are creating an engine, I like to think of 'db_string' as the key. It holds text containing a lot of information and instructions about our database, including its name, location, login credentials, and SQL flavor/dialect. So with all of this information complete within 'db_string', our code of 'engine = create_engine(db_string)' allows our program to point directly to the database called 'COVID_MSU' and interact with it using the 'engine' variable. The final line of code takes all of the data from our 'cdc_df1' DataFrame (or dataset, as I've been referring to it), and passes it to the to_sql() method. This line is a little friendlier, so one can almost read it left-to-right to see that our data frame is being converted to SQL as the table name 'cdc_df_import', using 'engine' as the connector/instantiatior, and replacing itself should it already be found.
 
@@ -118,6 +120,8 @@ The actual process moves much faster than I just described! In less than a secon
 ![](Images/database_main.png)
 
 It may also make the most sense now to note that very similar code is run to reverse this process to allow for an integration *from* the database *to* Jupyter Notebook for our logistic regression analysis. In his machine learning model, Brett will import the same dependencenies, and the same first two lines of 'connector code' creating 'db_string' and 'engine', making any changes particular to his pgAdmin/postgres credentials. However, the final line of code creates a DataFrame using a pandas method called 'read_sql_query()', which uses SQL to read from our specified database table via the 'engine' connection. I believe Brett is including this example within his ML code.
+
+![](database/resources/integration_pgadmin_to_ml_generalized.PNG)
 
 So from here, we created a series of tables in the database to both explore and help analyze trends in our data.  The following tables were created to filter the data and are not pictured though the code to create them is found in tables.sql:
 - cases_by_region_midwest
@@ -140,13 +144,13 @@ So from here, we created a series of tables in the database to both explore and 
 ## Data Exploration Phase
 After spending time building the code to create our tables and looking through them, we began digging into them, but soon realized each category from the main data table (like age_range, for example) had been transformed into a series of tables aggregating unique category values (a table of records of 0-17 ages, one for 18-49 ages, etc.). In contrast, we only had a single table, 'region', where we instead took many state location values and categorized them into fewer. We instead thought, why not add 'region' on to our original table, save it as a new table by using conditionals to populate the US Census region for each case, and then use that data in Tableau to analyze our data?  This table is called cdc_df_regions.  We discovered this was needed when thinking about the visualizations and the desire to break data up into the regions of the United States to compare them all together instead of using separate region tables as created initially. 
 
-Initial data exploration was conducted in pgAdmin in the creation of the county_counts table and the total_deaths table.  Three tables were created to count the number of hospitalizations, ICU admissions, and deaths.  Two inner joins were then performed to combine the information into one table, grouped by county.  The SQL code to duplicate this is found in the file tables.sql.  This exploration made it apparent that we lost much of the data that would have made the sample truly representative, as there were many fewer counties than the population represented.  
+Initial data exploration was conducted in pgAdmin in the creation of the county_counts table and the total_deaths_by_county table.  Three tables were created to count the number of hospitalizations, ICU admissions, and deaths.  Two inner joins were then performed to combine the information into one table, grouped by county.  The SQL code to duplicate this is found in the file tables.sql.  This exploration made it apparent that we lost much of the data that would have made the sample truly representative, as there were many fewer counties than the population represented.  
 
 ![](Images/county_counts.png)
 
-The total_deaths table represents the number of deaths by month (all years combined) to get a picture of the "deadliest months."  
+The total_deaths_by_county table represents the number of deaths for each county represented.  
 
-![](Images/total_deaths.png)
+![](database/resources/total_deaths_by_county.PNG)
 
  Once the database and its tables were created, we were able to export cdc_df_regions into a csv file and perform data exploration and visualization in Tableau.
 
