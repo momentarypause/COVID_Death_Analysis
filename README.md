@@ -110,13 +110,12 @@ After creating our database in pgAdmin (essentially just naming it 'COVID_MSU'),
 ![](Images/.png)
 
 ### Database -LOAD
-![](Images/database_main.png)
 
 This code is really cool. It takes our finished, cleaned dataset from our Jupyter Notebook file and pushes it right inside our new, empty database in pgAdmin.  It does this by first importing dependencies that allow us to create database engines, connections, and adaptors (fancy speak for all the tools we need to make this process possible). Next, we create "db_string", and since we are creating an engine, I like to think of 'db_string' as the key. It holds text containing a lot of information and instructions about our database, including its name, location, login credentials, and SQL flavor/dialect. So with all of this information complete within 'db_string', our code of 'engine = create_engine(db_string)' allows our program to point directly to the database called 'COVID_MSU' and interact with it using the 'engine' variable. The final line of code takes all of the data from our 'cdc_df1' DataFrame (or dataset, as I've been referring to it), and passes it to the to_sql() method. This line is a little friendlier, so one can almost read it left-to-right to see that our data frame is being converted to SQL as the table name 'cdc_df_import', using 'engine' as the connector/instantiatior, and replacing itself should it already be found.
 
 The actual process moves much faster than I just described! In less than a second, we had our basic database!  This code and tables.sql was then sent to the other team members to create the database on their machines so they had easy access to the data as well.
 
-![](Images/county_counts.png)
+![](Images/database_main.png)
 
 It may also make the most sense now to note that very similar code is run to reverse this process to allow for an integration *from* the database *to* Jupyter Notebook for our logistic regression analysis. In his machine learning model, Brett will import the same dependencenies, and the same first two lines of 'connector code' creating 'db_string' and 'engine', making any changes particular to his pgAdmin/postgres credentials. However, the final line of code creates a DataFrame using a pandas method called 'read_sql_query()', which uses SQL to read from our specified database table via the 'engine' connection. I believe Brett is including this example within his ML code.
 
@@ -156,25 +155,25 @@ Most of the analysis was conducted using Tableau, a visual analytics platform bu
 
 ### Observations
 - Distribution of cases by region/year
-        - We saw that the West coast contained the most deaths by year during our dataset. Of course, with the caveat that our current geographical data isn't representative of the US as a whole, and therefore, most likely not of any statistical use.
+    - We saw that the West coast contained the most deaths by year during our dataset. Of course, with the caveat that our current geographical data isn't representative of the US as a whole, and therefore, most likely not of any statistical use.
 - Distribution by Sex
-        - Our dataset contains more females, above 50%, while men comprised over 50% of the deaths.
+    - Our dataset contains more females, above 50%, while men comprised over 50% of the deaths.
 - Distribution by Race
-        - The vast majority of fully-filled-out records (or, to put it another way, what remained from Andy's cleaning) belonged to Caucasian individuals. We unfortunately don't really have the data to draw any conclusions from this observation, only that we noticed it and it would be fascinating to conduct additional analysis into the finding.
+    - The vast majority of fully-filled-out records (or, to put it another way, what remained from Andy's cleaning) belonged to Caucasian individuals. We unfortunately don't really have the data to draw any conclusions from this observation, only that we noticed it and it would be fascinating to conduct additional analysis into the finding.
 - Symptomatic vs Asymptomatic
-        - 5% of the deaths in our dataset were from asymptomatic cases.
+    - 5% of the deaths in our dataset were from asymptomatic cases.
 - Distribution of cases by age range
-        - Most cases in our dataset were records marked in the 18-49 age range, however, 64 out of our 66 deaths belonged to records marked in the 65+ age range.
+    - Most cases in our dataset were records marked in the 18-49 age range, however, 64 out of our 66 deaths belonged to records marked in the 65+ age range.
 - Hospitalization by age/race
-        - We again found the 18 to 49 age group interesting for a number of reasons:
-                - it contains largest count of records
-                - it is largest range of years grouped (30, while some are less than half that amount)
-                - it also has the most racial groups captured
-        - We noticed the majority of deaths came from elder caucasians
+    - We again found the 18 to 49 age group interesting for a number of reasons:
+        - it contains largest count of records
+        - it is largest range of years grouped (30, while some are less than half that amount)
+        - it also has the most racial groups captured
+    - We noticed the majority of deaths came from elder caucasians
 - Icu Admissions by age/race
-        - while 15 from 18-49 were admitted to the ICU, none passed
+    - while 15 from 18-49 were admitted to the ICU, none passed
 - All Geographic Visualizations
-        - We developed a great series of geographic visualization tools here to do a more robust analysis if we can work in the time to obtain a more distributed geographical dataset.
+    - We developed a great series of geographic visualization tools here to do a more robust analysis if we can work in the time to obtain a more distributed geographical dataset.
 
 
 ## Machine Learning Model
