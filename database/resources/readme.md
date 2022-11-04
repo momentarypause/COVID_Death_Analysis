@@ -114,7 +114,7 @@ We created the following visualizations in Tableau:
         - We developed a great series of geographic visualization tools here to do a more robust analysis if we can work in the time to obtain a more distributed geographical dataset. 
 
 - hosp by region
-        - same ^^
+        - same ^^..
 
 - icu adm by region
         - ^^
