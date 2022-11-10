@@ -7,19 +7,6 @@ Factors contributing to the death of COVID-19 patients
 ## Topic Purpose
 COVID-19 has affected nearly every person on this planet in at least one way since its outbreak in early 2020.  Many people have been impacted by the death of friends and/or family and are asking why this happened and if it could have been avoided. While those heavy questions may not be able to be answered fully by simple data analysis, we hope to generate conversation by using the COVID-19 Case Surveillance Public Use Data with Geography dataset to discover connections between certain demographic and geographic factors and death of COVID-19 patients.
 
-##  Communication Protocols
-A private Slack channel will be the primary means of communication along with online face-to-face meetings via Zoom in addition to alloted class time to check in and work through complex issues together. 
-
-- Meeting 1: Tuesday, October 18, 9:00-9:45 pm 
-- Meeting 2: Wednesday, October 19, 8:00-9:00 pm 
-- Meeting 3: Thursday, October 20, 6:30-9:15 pm 
-- Meeting 4: Tuesday, October 25, 7:00-9:00 pm
-- Meeting 5: Thursday, October 27, 7:00-9:00 pm
-- Meeting 6: Tuesday, November 1, 1:00-2:30 pm
-- Meeting 7: Tuesday, November 1, 7:00-9:30 pm
-- Meeting 8: Wednesday, November 2, 2:15-5:00 pm
-- Meeting 9: Thursday, November 3, 6:30-9:30 pm
-
 ## Technologies
 ### Tools
 - Github
@@ -43,9 +30,8 @@ A private Slack channel will be the primary means of communication along with on
 ## PRESENTATION LINK
 https://docs.google.com/presentation/d/1mb-FrvVJSPmFRAVFaV_9wm2A9y0N-OhCBasbagVjU_E/edit?usp=sharing
 
-## Questions to Answer
-- What factors contributed most heavily to the deaths of people who contracted COVID-19?  
-- Can this be used to build a machine learning model to predict the likelihood of death based on demographic and geographic factors?
+## Question to Answer 
+- Can a machine learning model be used to help predict the likelihood of death from COVID 19 based on demographic and geographic factors?
 
 
 
@@ -79,7 +65,7 @@ An API call was placed to https://data.cdc.gov/resource/n8mc-b4w4.json to extrac
 
 We chose to collect a large sample of records from the CDC and then drop any with NANs or values of "Unknown", "Missing", or "NA". Subsequent investigation with different samples of 1000 records showed anywhere from 1.5% - 3.3% of the records in a given dataset could remain post-cull. The code was adjusted to pull a total of 250,000 records from the API call as a precaution.
 
-As a group we all thought this topic of missing data, removing records, etc. was a fascinating topic and one we wanted more time to investigate, but felt it was probably outside the project's scope. We are interested in if/how our data collection method could skew our data. Are we doing everything properly with this approach, or is this level of record removal too much? This is the first "real world" scenario we've encountered, but we didn't imagine so much missing information!
+As a group we all thought this topic of missing data, removing records, etc. was a fascinating topic and one we wanted more time to investigate, but felt it was probably outside the project's scope. We were interested in if/how our data collection method could skew our data. Are we doing everything properly with this approach, or is this level of record removal too much? This is the first "real world" scenario we've encountered, but we didn't imagine so much missing information!
 
 
 
@@ -89,7 +75,7 @@ The initial data cleanup effort (found in ETL_T&L.ipynb, which loads the raw API
 
 After the initial exploration, several other methods of data wrangling were used in preparation for data analysis: dropping a column/s, manipulating datetime into new columns, changing dtypes, and removing records based on a value.  The team collaborated to suggest better code to use, suggest different approaches, finalize the dataset, and narrow down which questions to explore. 
 
-While doing final housekeeping, I noticed negative values populating the 'case_positive_specimen' feature for the first time. Given this feature's definition of 'Weeks between earliest date and date of first positive specimen collection' I decided these values warranted removal, and that all of the rest of my columns warranted a second .value_counts().
+While doing final housekeeping, I noticed negative values populating the 'case_positive_specimen' feature for the first time. Given this feature's definition of 'Weeks between earliest date and date of first positive specimen collection' I decided these values warranted removal, and that all of the rest of the columns warranted a second .value_counts().
 
 The second look proved fruitful; our cleaned dataset began revealing itself in ways it hadn't before. Or, more accurately, in ways I hadn't allowed it to yet. For example, records of patients residing in Utah, Ohio, Pennsylvania, and Kansas comprise 71.55% of the dataset, compared with only 20.04% of the raw API-called data. Futhermore, our final set contains records of patients residing in 19 unique states or territories, while the raw set, 45.
 
@@ -101,11 +87,11 @@ I think the heart of the matter is most likely that our data collection process 
 
 Despite these observations, we kept moving forward so as to not fall behind on our deliverables. And logically, if turns out that we need to redo steps 2 or 3 in the pipeline, it will still make sense to have steps 1 and 4:25 complete so that everything plugs in.
 
-After creating our database in pgAdmin (essentially just naming it 'COVID_MSU'), I added our code in Jupyter Notebook to create the connection between it and our clean dataset and its new database home.
+After creating our database in pgAdmin (named 'COVID_MSU'), I added our code in Jupyter Notebook to create the connection between it and our clean dataset and its new database home.
 
 
 #### Observations and Limitations of the Data
-- Geographical distriibution is uneven.  The original API call only pulled one record each from several states.  After data cleanup, many of these states were eliminated due to missing values to the point we were only left with representation from about 20 states.  When broken into regions, this evened out more, however, the dataset as a whole is not representational of each state.
+- Geographical distriibution is uneven.  The original API call only pulled one record each from several states.  After data cleanup, many of these states were eliminated due to missing values to the point we were only left with representation from about 20 states.  When broken into regions, this evened out more, however, the dataset as a whole is not representational of the population.
 
 ![](Images/state_counts.png)
 
@@ -119,11 +105,11 @@ The actual process moves much faster than I just described! In less than a secon
 
 ![](Images/database_main.png)
 
-It may also make the most sense now to note that very similar code is run to reverse this process to allow for an integration *from* the database *to* Jupyter Notebook for our logistic regression analysis. In his machine learning model, Brett will import the same dependencenies, and the same first two lines of 'connector code' creating 'db_string' and 'engine', making any changes particular to his pgAdmin/postgres credentials. However, the final line of code creates a DataFrame using a pandas method called 'read_sql_query()', which uses SQL to read from our specified database table via the 'engine' connection. I believe Brett is including this example within his ML code.
+It may also make the most sense now to note that very similar code is run to reverse this process to allow for an integration *from* the database *to* Jupyter Notebook for our logistic regression analysis. In his machine learning model, Brett will import the same dependencenies, and the same first two lines of 'connector code' creating 'db_string' and 'engine', making any changes particular to his pgAdmin/postgres credentials. However, the final line of code creates a DataFrame using a pandas method called 'read_sql_query()', which uses SQL to read from our specified database table via the 'engine' connection. 
 
 ![](database/resources/integration_pgadmin_to_ml_generalized.PNG)
 
-So from here, we created a series of tables in the database to both explore and help analyze trends in our data.  The following tables were created to filter the data and are not pictured though the code to create them is found in tables.sql:
+So from here, we created a series of tables in the database to both explore and help analyze trends in our data.  The following tables were created to filter the data and are not pictured, though the code to create them is found in tables.sql:
 - cases_by_region_midwest
 - cases_by_region_northeast
 - cases_by_region_south
@@ -185,19 +171,27 @@ Logistic Regression was chosen because there was a specific target that was bein
 
 
 ### Preliminary Data Preprocessing
-After loading in the data from the SQL database, the new dataframe was printed to inspect the columns and data types. Pandas get dummies method was used to change all categorical columns so that it would be able to be analyzed by the machine learning model. Label encoder was used from the SKLearn Library one other columns that used string types such as True and False to switch it to numerical data types. Columns that were not useful for the machine learning model were dropped from the dataframe. 
+The data was loaded in from the SQL database and read into a Pandas data frame. From there, the data types were inspected. For the data to be work in the machine learning model, the pandas get dummies method was used to convert some data types to numerical values. Label Encoder was also used from SKLearn library, which converts object or boolean types to integers: zeros and ones. Columns were inspected and several were removed because they were unnecessary, including multiple duplicate indexes. 
 
 ### Preliminary Feature Engineering and Selection
-Since the main question for the project was to use data from the CDC to predict death based off factors such as hospitalization, sex, ethnicity, and symptom status, the target selection was clearly the Death column. The remaining features were used as features for the machine learning model, except for the duplicate index columns and the state code, which was already represented from the state column.  Leaving county and state as features will allow for future analysis on whether geographic location had an impact on Covid deaths. 
+The main question for this project was whether deaths from Covid could be predicted based on numerous different factors, such as hospitalization, sex, ethnicity, and symptom status. The data was extracted from the CDC website; this data included whether the person has died from covid or not, which makes this the clear choice for the target feature: Death Yn. This allows for us to clearly see if the model will accurately predict death. The remaining columns are used as the features to help make the prediction in the model. Geographical data was included in the features to determine in future analysis if location had an impact on covid deaths.
 
 ### Training and Testing
-Data was split into training and testing with the Train_test_split function from the SKLearn library with the default options. Stratify=y was used to ensure that when the data was split into training and testing sets that a proportional amount of the target variable would be distributed among each.  After noticing the balance of the target outcomes, the data was also resampled using the SMOTEEN sampling algorithm from the IMBLearn library. 
+- The data was prepared for the Logistic regression model by splitting the data into training and testing sets. From the SKLearn library, there is a method called Train_Test_Split that divides the dataset into a group to help train the model and a group to help compare how well the model is at predicting the data. Using this method, 75% of the data was used to train, and the remaining 25% was used to test the accuracy of the model. When the data was split, it was also stratified, which means the data was split so it had a proportional number of deaths and non-deaths for the target feature. 
+- After the preprocessing stage and splitting the data into training and testing sets, the target values were counted to show that it was very unbalanced (way more non-deaths than deaths). The SMOTEENN Sampling Algorithm from the IMBLearn library was used to resample the data. The process it performs is synthetically generating new data points (oversampling) while also clustering data points and deleting them (Undersampling). This created a new resampled set that had an even distribution of deaths to non-deaths. The new sample was resampled and fit with this SMOTEENN algorithm. Using this sampling algorithm had a great impact on the accuracy score throughout the process. 
+- The balanced accuracy score was monitored during each phase while training the machine learning model. The original score was 71% before columns were dropped, sampling was executed, or label encoder was performed.  After all of these training stages were complete, the model boasts a balanced accuracy score of 95%. 
+
 
 ### Limitations and Benefits
-The limitations include the possibility of overfitting the data, and new data would not be as predictable. Another limitation is that the logistic regression model is not as complex or robust as neural networks or deep learning models. 
+The limitations include the possibility of overfitting the data, and new data would not be as predictable. Another limitation is that the logistic regression model is not as complex or robust as neural networks or deep learning models. It might struggle with more complex datasets, as well. Another limitation for our model is that the data sample used in this project was a smaller dataset, which might lead to a higher chance of overfitting.
+Benefits include that Logistic regression is a simpler model which makes it faster and cheaper to process, it’s easier to understand, and it’s easier to audit and track.
 
 ### Accuracy Score
-COMING SOON!
+- A balanced accuracy score is a way to measure a machine learning model’s ability to predict data. The balanced accuracy score is used because the dataset we are testing has a binary result where it was being classified as one of two options.  It is defined as the average of recall for each class, and it has a best score of 1 and a worst score of 0. 
+- A classification report imbalanced was also used to measure the effectiveness of the model. Within this report there is: precision, recall, and F1 score. 
+- A confusion matrix was also included in the report to show how well the model performed. A confusion matrix shows how the model associated the actual and predicted values, with the results being classified as true positives, true negatives, false positives, and false negatives.
+- The accuracy score at this stage of the project is at 95%. The model has been trained and the score improved at every stage. A limitation to this score is that it may indicate that the model may have been overfit to the existing dataset.  
+
 
 
 ## Dashboards
@@ -217,10 +211,6 @@ The link to the Tableau Worksheets and Dashboards is https://public.tableau.com/
 - Distribution by Race
     - Horizontal Bar Graph
     - Shows total cases broken up by race
-    - Filterable by Death Y/N to see the same comparison of those who died
-- Distribution of Cases by Symptomatic vs. Asymptomatic
-    - Chart
-    - Shows total cases broken up by Asymptomatic and Symptomatic status
     - Filterable by Death Y/N to see the same comparison of those who died
 - Distribution by Age Range
     - Treemap
