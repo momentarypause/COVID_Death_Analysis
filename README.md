@@ -162,8 +162,15 @@ Most of the analysis was conducted using Tableau, a visual analytics platform bu
     - We noticed the majority of deaths came from elder caucasians
 - Icu Admissions by age/race
     - while 15 from 18-49 were admitted to the ICU, none passed
-- All Geographic Visualizations
-    - We developed a great series of geographic visualization tools here to do a more robust analysis if we can work in the time to obtain a more distributed geographical dataset.
+- Death Map
+    - Created to show the distributions of death counts across the United States.  With a more balanced data set, this can show us the areas of the country that have been the hardest hit by death.
+- Hospitalizations by Region
+    - Created to show the counts of death compared across 4 regions of the United States.  With current data, this is showing that the Northeast was the least affected.  We are unsure if this is true or if the data set just pulled less cases from the northeast in general.
+- ICU Admissions by Region
+    - Again, the current data is showing the Northeast as less affected.  It will be interesting to see if this remains true with a more balanced dataset.
+- Deaths by Region
+    - Current data shows the West was most heavily affected by COVID deaths. Going back to the map analysis of the US, seeing the count of deaths reported in Idaho, this makes sense.
+
 
 
 ## Machine Learning Model
@@ -195,56 +202,56 @@ Benefits include that Logistic regression is a simpler model which makes it fast
 
 
 ## Dashboards
-The dashboards will be created using Tableau.  It will include the following dashboards organized into perspectives.  This will allow for more visualizations without crowding them onto one viewing space.
+The dashboards were created using Tableau.  It includes the following dashboards organized into perspectives, collected into a story, which is a cohesive collection of tableau worksheets (individual visualizations) collected onto dashboards (collections of worksheets) and displayed together to make it easier to tell the data story as a whole.
 
-The link to the Tableau Worksheets and Dashboards is https://public.tableau.com/app/profile/mandy.glynn/viz/COVIDAnalysis_16675052127620/Reg_Hosp?publish=yes
+The link to the Tableau Worksheets and Dashboards is https://public.tableau.com/views/COVIDAnalysis_16675052127620/COVIDStory?:language=en-US&:display_count=n&:origin=viz_share_link
 
-### Distribution Dashboard
-- Distribution of Cases by Region and Year
-    - Packed Bubbles
-    - Shows a comparison of bubble size of total cases for each region and each year
-    - Filterable by Death Y/N to see the same comparison of those who died
-- Distribution by Sex
-    - Pie Graph
-    - Shows total cases broken up by Male and Female (the "other" category was eliminated for null or missing values during data cleanup)
+### Factor Distribution Among Cases
+- Distribution by Age Range
+    - Treemap
+    - Shows comparison of number of cases broken into age ranges
     - Filterable by Death Y/N to see the same comparison of those who died
 - Distribution by Race
     - Horizontal Bar Graph
     - Shows total cases broken up by race
     - Filterable by Death Y/N to see the same comparison of those who died
-- Distribution by Age Range
-    - Treemap
-    - Shows comparison of number of cases broken into age ranges
+- Distribution by Sex
+    - Pie Graph
+    - Shows total cases broken up by Male and Female (the "other" category was eliminated for null or missing values during data cleanup)
     - Filterable by Death Y/N to see the same comparison of those who died
-### Age and Race Dashboard
-- Hospitalized by Age and Race
-    - Bar Graph
-    - Shows a breakdown of total cases where the patient was hospitalized by age range and race
-    - Filterable by Death Y/N to see how many in each category died while hospitalized
-- ICU Admissions by Age and Race
-    - Bar Graph
-    - Shows a breakdown of total cases where the patient was admitted to the ICU by age range and race
-    - Filterable by Death Y/N to see how many in each category died while in the ICU
-- Deaths by Age and Race
+- Distribution of Cases by Region and Year
+    - Packed Bubbles
+    - Shows a comparison of bubble size of total cases for each region and each year
+    - Filterable by Death Y/N to see the same comparison of those who died
+
+### Deaths, Hospitalizations, and ICU Admissions by Age and Race
+- Deaths
     - Bar Graph
     - Shows a breakdown of total deaths by age range and race
     - Filter is set to Death Yn: True
-### UNDER CONSTRUCTION...Date dashboard...UNDER CONSTRUCTION
-- Factors by month
-    - Bar Graph -stacking
-    - Filterable by year and factor
-- Counts over time
-    - Line Graph
-    - Filterable by factor to show one or more factors at a time
-### Geographical dashboard
+- Hospitalized
+    - Bar Graph
+    - Shows a breakdown of total cases where the patient was hospitalized by age range and race
+    - Filterable by Death Y/N to see how many in each category died while hospitalized
+- ICU Admissions
+    - Bar Graph
+    - Shows a breakdown of total cases where the patient was admitted to the ICU by age range and race
+    - Filterable by Death Y/N to see how many in each category died while in the ICU
+
+### Factors by Location
+- Death Count by Location
+    - Geographical map showing which states had the highest deaths by circle size. 
 - Hospitalization, ICU, and Death by Census Region
     - 3 Bar Graphs
     - Each graph is filterable by death status to compare how many hospitalization and icu cases in each region resulted in death 
-- Death Count by Location
-    - Geographical map showing which states had the highest deaths by circle size
 
-
-
+### Machine Learning Model
+- Machine Learning Accuracy
+    - Bar Graph
+    - This shows how the accuracy score changed with each iteration of adjustments to the machine learning model
+- Precision and Recall
+    - Chart
+    - This shows the final precision and recall scores for whether death can be predicted using the model
 
 ## Recommendations for Future Analysis
 Considering we were only able to retain a very small percentage of the original data once null/missing/NA values were removed, an interesting exploration would be WHY those values are missing.  Did providers from a certain region/state/county routinely underreport their patient information?  Did patients from one ethnicity or race have more or less information included about their case?  What does that say about the healthcare system or providers in the United States?
