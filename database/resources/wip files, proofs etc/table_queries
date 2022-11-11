@@ -1,0 +1,117 @@
+-- Age Separation
+
+SELECT * 
+INTO 0_to_17
+FROM table_name
+WHERE age_group = '0 - 17 years';
+
+SELECT * 
+INTO 18_to_49
+FROM table_name
+WHERE age_group = '18 - 49 years';
+
+SELECT * 
+INTO 50_to_64
+FROM table_name
+WHERE age_group = '50 - 64 years';
+
+SELECT * 
+INTO 65_plus
+FROM table_name
+WHERE age_group = '65+ years';
+
+
+-- Lab-confirmed vs. Probable Cases
+
+SELECT * INTO lab_confirmed_cases
+FROM table_name
+WHERE current_status = "Laboratory-confirmed case";
+
+SELECT * INTO probable_cases
+FROM table_name
+WHERE current_status = "Proable case";
+
+
+-- Separation by Sex
+
+SELECT * INTO cases_by_sex_female
+FROM table_name
+WHERE sex = "Female";
+
+SELECT * INTO cases_by_sex_male
+FROM table_name
+WHERE sex = "Male";
+
+SELECT * INTO cases_by_sex_other
+FROM table_name
+WHERE sex = "Other";
+
+
+-- Separation by US Census Region
+
+SELECT * INTO cases_by_region_west
+FROM table_name
+WHERE res_state IN ("WA", "MT", "OR", "ID", "WY", "CA", "NV", "UT", "CO", "NM", "AZ", "AK", "HI");
+
+SELECT * INTO cases_by_region_south
+FROM table_name
+WHERE res_state IN ("TX", "OK", "AR", "LA", "MS", "AL", "GA", "FL", "TN", "KY", "WV", "VA", "NC", "SC", "MD", "DC", "DE");
+
+SELECT * INTO cases_by_region_midwest
+FROM table_name
+WHERE res_state IN ("ND", "SD", "NE", "KS", "MN", "IA", "MO", "WI", "IL", "MI", "IN", "OH");
+
+SELECT * INTO cases_by_region_northeast
+FROM table_name
+WHERE res_state IN ("ME", "NH", "VT", "NY", "PA", "NJ", "CT", "RI", "MA");
+
+
+-- State/County of Residence and Code
+
+SELECT DISTINCT res_state, state_fips_code
+INTO states_and_codes
+FROM table_name;
+
+SELECT DISTINCT res_county, county_fips_code
+INTO counties_and_codes
+FROM table_name;
+
+
+-- Counts by county
+
+SELECT county_fips_code, 
+    res_county, 
+    COUNT(hosp_yn) AS hosp_count
+FROM table_name
+INTO hosp_by_county
+WHERE hosp_yn = "Yes"
+GROUP BY county_fips_code;
+
+SELECT county_fips_code, 
+    res_county, 
+    COUNT(icu_yn) AS icu_count
+FROM table_name
+INTO icu_by_county
+WHERE icu_yn = "Yes"
+GROUP BY county_fips_code;
+
+SELECT county_fips_code, 
+    res_county, 
+    COUNT(death_yn) AS death_count
+FROM table_name
+INTO total_deaths_by_county
+WHERE death_yn = "Yes"
+GROUP BY county_fips_code;
+
+-- Join County Counts into one table
+
+SELECT hosp_by_county.county_fips_code, 
+    hosp_by_county.res_county, 
+    hosp_by_county.hosp_count,
+    icu_by_county.icu_count,
+    total_deaths_by_county.death_count
+INTO county_counts
+FROM hosp_by_county
+INNER JOIN icu_by_county ON icu_by_county.county_fips_code = hosp_by_county.county_fips_code
+INNER JOIN total_deaths_by_county ON total_deaths_by_county.county_fips_code = hosp_by_county.county_fips_code
+ORDER BY county_fips_code;
