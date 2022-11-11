@@ -12,7 +12,6 @@
  -->
 
 
-
 Reason Why (section v. slide?)
     - topic engaged us all equally
     - all felt we would have abundance of data to explore
