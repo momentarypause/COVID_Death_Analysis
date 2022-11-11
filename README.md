@@ -197,7 +197,7 @@ Benefits include that Logistic regression is a simpler model which makes it fast
 - A balanced accuracy score is a way to measure a machine learning model’s ability to predict data. The balanced accuracy score is used because the dataset we are testing has a binary result where it was being classified as one of two options.  It is defined as the average of recall for each class, and it has a best score of 1 and a worst score of 0. 
 - A classification report imbalanced was also used to measure the effectiveness of the model. Within this report there is: precision, recall, and F1 score. 
 - A confusion matrix was also included in the report to show how well the model performed. A confusion matrix shows how the model associated the actual and predicted values, with the results being classified as true positives, true negatives, false positives, and false negatives.
-- The accuracy score at this stage of the project is at 95%. The model has been trained and the score improved at every stage. A limitation to this score is that it may indicate that the model may have been overfit to the existing dataset.  
+- The accuracy score at this stage of the project is at 95%. The model has been trained and the score improved at every stage. Given this score, this model would appear to predict patient death in this dataset with high accuracy.  However, a limitation to this score is that it may indicate that the model may have been overfit to the existing dataset.  
 
 
 
