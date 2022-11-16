@@ -5,6 +5,7 @@ Readme contributions for arutledge Segment 1 & 2 Database work
 ## Summary
 
 
+
 ## Narrative
 
 We chose a COVID-19 dataset from the CDC. We selected because of its of large record quantity and our presumption of quality, and our belief that it 
