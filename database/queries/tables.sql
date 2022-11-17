@@ -150,3 +150,13 @@ GROUP BY death_yn, date_onset_month
 ORDER BY total_deaths DESC;
 
 select * from monthly_death_summary;
+
+
+-- simple death by age
+
+select age_range, COUNT(death_yn) as total_deaths
+into death_by_age
+from cdc_df_regions
+where death_yn = 'true'
+group by death_yn, age_range
+order by total_deaths desc;
